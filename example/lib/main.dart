@@ -60,7 +60,8 @@ class _MyAppState extends State<MyApp> {
 
   initBlueTooth() async {
     List<DeviceInfo> devices = await RtkBluetooth.getBondDevices;
-    NmeaUitls uitls = NmeaUitls();
+    // NmeaUitls uitls = NmeaUitls();
+    //这里直接使用第一个已经配对的设备
     RtkBluetooth.connect(
         callBack: (info) {
           print(info);
