@@ -1,5 +1,3 @@
-import 'package:rtk_bluetooth/rtk_bluetooth.dart';
-
 class RTKLocation {
   double latitude;
   double longitude;

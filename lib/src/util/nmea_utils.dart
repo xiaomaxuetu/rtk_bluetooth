@@ -4,13 +4,15 @@ import 'package:rtk_bluetooth/src/bean/gpvtg_info.dart';
 import 'package:rtk_bluetooth/src/util/nmea_util.dart';
 
 class NmeaUitls extends NmeaUtil {
+  Function(RTKLocation location) locationCallBack;
+  NmeaUitls({required this.locationCallBack});
   GPGGAInfo? info;
   @override
   void handleGpgga(String gpgga) {
     if (info != null) {
       RTKLocation location = info!.getLocation();
-      //用eventbus发送
-      print(location);
+
+      locationCallBack(location);
     }
     info = GPGGAInfo();
     info!.getGPGGA(gpgga);
@@ -29,6 +31,7 @@ class NmeaUitls extends NmeaUtil {
   @override
   void handleGpgsv(String gpgsv) {
     //直接广播发出去？
+    print(gpgsv);
   }
 
   @override

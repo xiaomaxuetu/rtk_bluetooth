@@ -1,8 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:rtk_bluetooth/rtk_bluetooth.dart';
+import 'package:rtk_bluetooth_example/data.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(App());
+}
+
+class App extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      routes: {
+        "/": (context) => MyApp(),
+      },
+    );
+  }
 }
 
 class MyApp extends StatefulWidget {
@@ -15,6 +27,7 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   List<String> list = [];
   bool isConnected = false;
+
   @override
   void initState() {
     super.initState();
@@ -42,6 +55,16 @@ class _MyAppState extends State<MyApp> {
                 child: Text(!isConnected ? "连接" : "断开",
                     style: TextStyle(
                       color: Colors.white,
+                    ))),
+            TextButton(
+                onPressed: () {
+                  showAboutDialog(
+                      context: context,
+                      children: [SelectableText(list.join("|"))]);
+                },
+                child: Text("导出",
+                    style: TextStyle(
+                      color: Colors.white,
                     )))
           ],
         ),
@@ -59,21 +82,29 @@ class _MyAppState extends State<MyApp> {
   }
 
   initBlueTooth() async {
-    List<DeviceInfo> devices = await RtkBluetooth.getBondDevices;
+    var nema = NmeaUitls(locationCallBack: (location) {
+      print(location);
+    });
+    dataStr.split("|").forEach((e) {
+      nema.handleNmea(e);
+    });
+    //List<DeviceInfo> devices = await RtkBluetooth.getBondDevices;
     // NmeaUitls uitls = NmeaUitls();
     //这里直接使用第一个已经配对的设备
-    RtkBluetooth.connect(
-        callBack: (info) {
-          print(info);
-          setState(() {
-            isConnected = true;
-          });
-        },
-        address: devices.first.address!);
-    RtkBluetooth.onNmeaChange.listen((event) {
-      print(event);
-      list.insert(0, event);
-      setState(() {});
-    });
+    // RtkBluetooth.connect(
+    //     callBack: (info) {
+    //       print(info);
+    //       setState(() {
+    //         isConnected = true;
+    //       });
+    //     },
+    //     address: devices.first.address!);
+    // RtkBluetooth.onNmeaChange.listen((event) {
+    //   print(event);
+    //   list.insert(0, event);
+
+    //   setState(() {});
+    //   nema.handleNmea(event);
+    // });
   }
 }

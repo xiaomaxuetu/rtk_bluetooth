@@ -92,12 +92,12 @@ class GPGGAInfo {
         stateSloution = int.parse(strTem);
       }
       //3.经纬度坐标
-      strTem = strTem[2];
+      strTem = strArray[2];
       if (strTem.length < 2) {
         blh.latitude = 0;
         return;
       } else {
-        blh.latitude = double.parse(strTem.substring(0, 3)) +
+        blh.latitude = double.parse(strTem.substring(0, 2)) +
             double.parse(strTem.substring(2)) / 60;
       }
       strTem = strArray[4];
