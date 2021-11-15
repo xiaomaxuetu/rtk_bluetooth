@@ -179,7 +179,7 @@ class GPGGAInfo {
         longitude: blh.longitude ?? 0,
         speed: speed ?? 0,
         altitude: blh.altitude ?? 0,
-        accuracy: hRMS! > 0 ? hRMS! : hdop!.toDouble(),
+        accuracy: hRMS! > 0 ? hRMS ?? 0.0 : (hdop ?? 0.0).toDouble(),
         signalTag: getSignalTag());
     return location;
   }
