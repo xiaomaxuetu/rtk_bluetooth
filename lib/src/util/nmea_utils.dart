@@ -31,7 +31,7 @@ class NmeaUitls extends NmeaUtil {
   @override
   void handleGpgsv(String gpgsv) {
     //直接广播发出去？
-    print(gpgsv);
+    //print(gpgsv);
   }
 
   @override
@@ -39,14 +39,12 @@ class NmeaUitls extends NmeaUtil {
     if (info != null) {
       GPVTGInfo gpvtgInfo = GPVTGInfo();
       gpvtgInfo.initFromStr(nmea);
-      double speed = gpvtgInfo.mSpeedKilo!;
+      double speed = gpvtgInfo.mSpeedKilo ?? 0;
       speed = speed / 3.6;
       info!.setSpeed(speed);
     }
   }
 
   @override
-  void handleGpzda(String nmea) {
-    // TODO: implement handleGpzda
-  }
+  void handleGpzda(String nmea) {}
 }

@@ -175,10 +175,10 @@ class GPGGAInfo {
 
   RTKLocation getLocation() {
     RTKLocation location = RTKLocation(
-        latitude: blh.latitude!,
-        longitude: blh.longitude!,
-        speed: speed!,
-        altitude: blh.altitude!,
+        latitude: blh.latitude ?? 0,
+        longitude: blh.longitude ?? 0,
+        speed: speed ?? 0,
+        altitude: blh.altitude ?? 0,
         accuracy: hRMS! > 0 ? hRMS! : hdop!.toDouble(),
         signalTag: getSignalTag());
     return location;
