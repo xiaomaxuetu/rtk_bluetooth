@@ -62,7 +62,7 @@ class GPGGAInfo {
   getGPGGA(String data) {
     try {
       int arrayMaxSize = 18;
-      List<String> strArray = <String>[]..length = arrayMaxSize;
+      List<dynamic> strArray = <dynamic>[]..length = arrayMaxSize;
 
       int nIndex = 0;
       for (String subString in data.split(",")) {

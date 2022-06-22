@@ -13,3 +13,7 @@
 ## 0.0.4
 
 * bug fixed
+
+## 0.0.5
+
+* bug fixed

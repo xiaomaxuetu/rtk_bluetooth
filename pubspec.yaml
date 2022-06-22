@@ -1,6 +1,6 @@
 name: rtk_bluetooth
 description: 使用经典蓝牙来连接国内的RTK设备
-version: 0.0.4
+version: 0.0.5
 homepage: https://github.com/xiaomaxuetu/rtk_bluetooth
 
 environment:
