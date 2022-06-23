@@ -11,7 +11,7 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       routes: {
-        "/": (context) => MyApp(),
+        "/": (context) => const MyApp(),
       },
     );
   }
@@ -53,7 +53,7 @@ class _MyAppState extends State<MyApp> {
                   }
                 },
                 child: Text(!isConnected ? "连接" : "断开",
-                    style: TextStyle(
+                    style: const TextStyle(
                       color: Colors.white,
                     ))),
             TextButton(
@@ -62,7 +62,7 @@ class _MyAppState extends State<MyApp> {
                       context: context,
                       children: [SelectableText(list.join("|"))]);
                 },
-                child: Text("导出",
+                child: const Text("导出",
                     style: TextStyle(
                       color: Colors.white,
                     )))
@@ -88,23 +88,23 @@ class _MyAppState extends State<MyApp> {
     dataStr.split("|").forEach((e) {
       nema.handleNmea(e);
     });
-    //List<DeviceInfo> devices = await RtkBluetooth.getBondDevices;
-    // NmeaUitls uitls = NmeaUitls();
+    List<DeviceInfo> devices = await RtkBluetooth.getBondDevices;
+    //NmeaUitls uitls = NmeaUitls();
     //这里直接使用第一个已经配对的设备
-    // RtkBluetooth.connect(
-    //     callBack: (info) {
-    //       print(info);
-    //       setState(() {
-    //         isConnected = true;
-    //       });
-    //     },
-    //     address: devices.first.address!);
-    // RtkBluetooth.onNmeaChange.listen((event) {
-    //   print(event);
-    //   list.insert(0, event);
+    RtkBluetooth.connect(
+        callBack: (info) {
+          print(info);
+          setState(() {
+            isConnected = true;
+          });
+        },
+        address: devices.first.address!);
+    RtkBluetooth.onNmeaChange.listen((event) {
+      print(event);
+      list.insert(0, event);
 
-    //   setState(() {});
-    //   nema.handleNmea(event);
-    // });
+      setState(() {});
+      nema.handleNmea(event);
+    });
   }
 }
